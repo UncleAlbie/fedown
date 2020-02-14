@@ -87,14 +87,15 @@ def _api_url_from_query(query, namespace):
                                                  username=query)
 
     # query repository
-    return '{pagure}/{namespace}/{repo}'.format(pagure=PAGURE_API_URL,
-                                                namespace=namespace,
-                                                repo=query)
+    return '{pagure}/{namespace}/{repo}?{opts}'.format(pagure=PAGURE_API_URL,
+                                                       namespace=namespace,
+                                                       repo=query,
+                                                       opts='per_page=100')
 
 
 def _user_access_query_to_stdout(query, member_type, formatter,
                                  namespace='rpms', human_readable=False,
-                                 skip_on_failure=False, includeforks=False,
+                                 skip_on_failure=False, include_forks=False,
                                  names_only=False):
     """
     Print user access information parsed from the Pagure API response to stdout
@@ -146,7 +147,7 @@ def _user_access_query_to_stdout(query, member_type, formatter,
                                 output_format=Format.STDOUT_LIST_ITEM)
 
         # Forks
-        if member_type == 'owner' and includeforks:
+        if member_type == 'owner' and include_forks:
             if response['forks']:
                 print_formatted('Forks',
                                 output_format=Format.STDOUT_LIST_HEADER)
@@ -207,15 +208,16 @@ def _user_access_query_to_stdout(query, member_type, formatter,
                     response['repos_pagination']['next']))
                 response['repos'] += next_response['repos']
                 response['repos_pagination']['next'] = \
-                        next_response['repos_pagination']['next']
+                    next_response['repos_pagination']['next']
 
             # Load next forks pages
-            while 'forks_pagination' in response \
-                    and response['forks_pagination']['next']:
-                next_response = json.load(urlopen(
-                    response['forks_pagination']['next']))
-                response['forks'] += next_response['forks']
-                response['forks_pagination']['next'] = \
+            if include_forks:
+                while 'forks_pagination' in response \
+                        and response['forks_pagination']['next']:
+                    next_response = json.load(urlopen(
+                        response['forks_pagination']['next']))
+                    response['forks'] += next_response['forks']
+                    response['forks_pagination']['next'] = \
                         next_response['forks_pagination']['next']
         except HTTPError as err:
             print_formatted(request_url, output=sys.stderr)
@@ -351,7 +353,7 @@ def main():
                                  namespace=args.namespace,
                                  human_readable=args.human_readable,
                                  skip_on_failure=args.skip_on_failure,
-                                 includeforks=args.include_forks,
+                                 include_forks=args.include_forks,
                                  names_only=args.names_only)
 
 

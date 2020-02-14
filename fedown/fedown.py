@@ -292,8 +292,10 @@ def main():
     Program execution entry point with argument parsing using argparse.
 
     """
-    usage_description = 'Print Fedora Pagure repo ownership information.'
-    parser = argparse.ArgumentParser(description=usage_description)
+    desc = 'Print Fedora Pagure repo ownership information.'
+    version = '0.1'
+
+    parser = argparse.ArgumentParser(description=desc)
 
     # member type
     parser.add_argument('-t', '--type', type=str, choices={'all',
@@ -333,6 +335,9 @@ def main():
     parser.add_argument('-F', '--include-forks', action='store_true',
                         default=False,
                         help='Include forks (default: False)')
+    # Print version information and exit
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s {}'.format(version))
     args = parser.parse_args()
 
     if args.colors:

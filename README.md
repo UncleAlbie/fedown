@@ -3,6 +3,8 @@
 Small script written in Python that prints [Fedora](https://getfedora.org) user access information parsed from the [Fedora Pagure API](https://src.fedoraproject.org/api/).
 Licensed under [GPLv3](http://www.gnu.org/licenses/gpl.txt).
 
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/panovotn/fedown/package/fedown/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/panovotn/fedown/package/fedown/)
+
 ## Contents
 
 * [Installation](#installation)

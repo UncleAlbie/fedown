@@ -35,7 +35,7 @@ There is only manual installation process available at the moment.
  * The `~/.local/bin` directory needs to be included in your `PATH` environment variable or replaced with one that is.
 
 ```
-$ git clone [TODO: clone URL]
+$ git clone https://github.com/UncleAlbie/fedown.git
 $ cd fedown
 $ cp fedown/fedown.py ~/.local/bin/fedown
 $ chmod +x ~/.local/bin/fedown

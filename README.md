@@ -6,6 +6,7 @@ Licensed under [GPLv3](http://www.gnu.org/licenses/gpl.txt).
 ## Contents
 
 * [Installation](#installation)
+    - [Copr](#copr)
     - [Manual](#manual)
 * [Usage](#usage)
     - [Repository query](#repository-query)
@@ -26,9 +27,20 @@ Licensed under [GPLv3](http://www.gnu.org/licenses/gpl.txt).
 
 ## Installation
 
-There is only manual installation process available at the moment.
+There is only Copr and manual installation process available at the moment.
 
 ---
+
+### Copr
+
+ * For Fedora you can use [Copr](https://copr.fedorainfracloud.org/) builds.
+
+```
+# dnf copr enable panovotn/fedown
+# dnf install fedown
+```
+
+ * See the [Copr repository](https://copr.fedorainfracloud.org/coprs/panovotn/fedown/) for more information.
 
 ### Manual
 
